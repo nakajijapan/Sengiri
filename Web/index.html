@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="shortcut icon" href="/favicon.ico">
+
+<meta name="keywords" content="GIF,変換,画面キャプチャ" />
+<meta name="description" content="Sengiri - screen record tool" />
+<meta property="og:site_name" content="Sengiri - screen record tool" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://sengiri.nakajijapan.net" />
+<meta property="og:image" content="http://sengiri.nakajijapan.net/images/icon.png" />
+<meta property="og:title" content="Sengiri - screen record tool" />
+<meta property="og:description" content="Sengiri - screen record tool" />
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sengiri">
+<meta name="twitter:description" content="Sengiri - screen record tool">
+<meta name="twitter:creator" content="@nakajijapan">
+<meta name="twitter:image:src" content="http://sengiri.nakajijapan.net/images/icon.png">
+<meta name="twitter:domain" content="sengiri.nakajijapan.net">
+
+
+<title>sengiri &#34;画面キャプチャ＆GIF動画一括変換&#34;</title>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+<style>
+
+html, body, #content {
+    margin: 0px;
+    height: 100%;
+    font-family: Helvetica,sans-serif;
+    font-weight: lighter;
+    color: #1a1612;
+    background-color: #ffffff;
+    text-align: center;
+    line-height: 1.4;
+}
+#splash {
+    height: 100%;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    max-width: 900px;
+    margin: auto;
+    position: relative;
+}
+@media screen and (min-width: 700px) {
+    #splash > div {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 1em;
+        height: 100%;
+    }
+    #splash #left {
+        text-align: right;
+    }
+    #splash #right {
+        text-align: left;
+    }
+    #splash .iphone {
+        width: 320px;
+        height: 320px;
+    }
+    #screenshots img {
+        max-width: 700px;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    #splash {
+        margin-top: 50px;
+    }
+    #splash .iphone {
+        width: 192px;
+        height: 384px;
+        display: inline-block;
+    }
+    #splash #left {
+        padding: 10px;
+    }
+    #screenshots img {
+        max-width: 300px;
+    }
+    #splash .appstore {
+        /* display: none; */
+    }
+
+    .sns {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+    }
+}
+img.appstore {
+    max-width: 120px;
+}
+.iphone {
+    background-size: contain;
+    position: relative;
+    width: 720px;
+    height: 720px;
+}
+.iphone img {
+    position: absolute;
+    top: 17.9%;
+    left: 14%;
+    width: 73%;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway", sans-serif;
+    font-weight: normal;
+}
+#icon-row {
+    margin: 30px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    position: relative;
+}
+#icon-row #icon-container {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    border: 10px solid #910100;
+}
+
+#description {
+    margin: auto;
+    width: 90%;
+    max-width: 600px;
+}
+#screenshots {
+    margin-bottom: 2em;
+}
+#screenshots img {
+    border: 1px solid white;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+    margin: 1em;
+}
+#description {
+    white-space: pre-wrap;
+}
+
+
+.download {
+    border: none;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1.4;
+    border-radius: 4px;
+    padding: 10px 15px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+    transition: border .25s linear, color .25s linear, background-color .25s linear;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+}
+
+.download:hover {
+    background-color: #666;
+}
+
+.download:active {
+    background-color: #999;
+    color: #fff;
+}
+
+</style>
+</head>
+
+<body>
+
+<script>
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div id='content'>
+
+
+    <div id='splash'>
+        <div id='left'>
+            <h1>
+                Sengiri - 画面キャプチャ＆GIF動画一括変換<br />
+            </h1>
+
+            <p>
+              " Sengiri " from the screen recording until the animated GIF file , you can create as soon as a simple operation .
+Sengiri, in English, is the shred.
+            </p>
+            <p>
+
+                <b>- Features -</b><br />
+- You can specify a screen recording can area.<br />
+- Make the top window of the rectangle automatically.<br />
+- Video recording can be stopped from the status menu.<br />
+- Each operation will correspond to the shortcut.<br />
+            </p>
+
+            <a href='http://sengiri.nakajijapan.net/Versions/Sengiri.app.zip' class="download">Download</a>
+
+            <p>
+                <div style="overflow:hidden;margin-top:15px;">
+
+                    <div class="sns">
+                        <div style="float:right;width:110px;height:20px;overflow:hidden;">
+                            <a href="http://b.hatena.ne.jp/entry/http://sengiri.nakajijapan.net/" class="hatena-bookmark-button" data-hatena-bookmark-title="sengiri" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+                        </div>
+                        <div style="float:right;width:100px;height:20px;overflow:hidden;margin-left: 5px;">
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja">ツイート</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                        </div>
+                        <div style="float:right;width:100px;height:25px;overflow:hidden;">
+                            <div class="fb-like" data-href="http://sengiri.nakajijapan.net/" data-width="300" data-layout="button_count" data-show-faces="true" data-send="false"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </p>
+
+        </div>
+
+        <div id='right'>
+            <div class='iphone'>
+                <img src='./images/icon.png' width="100px"/>
+            </div>
+        </div>
+    </div>
+
+
+    <div id='icon-row'>
+    </div>
+
+    <div id='screenshots'>
+        <img src="./images/screencapture1.png" />
+        <img src="./images/screencapture2.png" />
+    </div>
+
+
+    <p id='description'>
+        Let's Start!!
+    </p>
+
+
+
+    <p>
+        <b>contact</b> <a href="https://twitter.com/nakajijapan">nakajijapan</a>
+    </p>
+
+    <p id='copyright'>Copyright &copy; 2016 @nakajijapan All Right Reserved.</p>
+
+
+
+</div>
+
+</body>
+</html>

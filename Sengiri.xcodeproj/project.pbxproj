@@ -1,0 +1,427 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC373BA21C906A4A0045B99C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC373BA11C906A4A0045B99C /* String.swift */; };
+		DC50F3231C82F446008518EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3221C82F446008518EC /* AppDelegate.swift */; };
+		DC50F3271C82F446008518EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC50F3261C82F446008518EC /* Assets.xcassets */; };
+		DC50F32A1C82F446008518EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC50F3281C82F446008518EC /* Main.storyboard */; };
+		DC50F33F1C82F4E1008518EC /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3321C82F4E1008518EC /* CaptureView.swift */; };
+		DC50F3401C82F4E1008518EC /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3331C82F4E1008518EC /* CaptureViewController.swift */; };
+		DC50F3411C82F4E1008518EC /* CaptureWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3341C82F4E1008518EC /* CaptureWindow.swift */; };
+		DC50F3421C82F4E1008518EC /* CaptureWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3351C82F4E1008518EC /* CaptureWindowController.swift */; };
+		DC50F3431C82F4E1008518EC /* Sengiri.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3361C82F4E1008518EC /* Sengiri.swift */; };
+		DC50F3451C82F4E1008518EC /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3381C82F4E1008518EC /* PreferenceViewController.swift */; };
+		DC50F3461C82F4E1008518EC /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3391C82F4E1008518EC /* PreferenceWindowController.swift */; };
+		DC50F3471C82F4E1008518EC /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F33A1C82F4E1008518EC /* RecordButton.swift */; };
+		DC50F3491C82F4E1008518EC /* WindowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F33C1C82F4E1008518EC /* WindowInfo.swift */; };
+		DC50F34A1C82F4E1008518EC /* WindowInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F33D1C82F4E1008518EC /* WindowInfoManager.swift */; };
+		DC50F34C1C82F4E7008518EC /* PreferenceWindowController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC50F34B1C82F4E7008518EC /* PreferenceWindowController.storyboard */; };
+		DC50F3501C82FB8E008518EC /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F34D1C82FB8E008518EC /* RxBlocking.framework */; };
+		DC50F3511C82FB8E008518EC /* RxBlocking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F34D1C82FB8E008518EC /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DC50F3521C82FB8E008518EC /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F34E1C82FB8E008518EC /* RxCocoa.framework */; };
+		DC50F3531C82FB8E008518EC /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F34E1C82FB8E008518EC /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DC50F3541C82FB8E008518EC /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F34F1C82FB8E008518EC /* RxSwift.framework */; };
+		DC50F3551C82FB8E008518EC /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F34F1C82FB8E008518EC /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DC50F3591C82FBB8008518EC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F3581C82FBB8008518EC /* AVFoundation.framework */; };
+		DC50F35B1C82FBC0008518EC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F35A1C82FBC0008518EC /* ImageIO.framework */; };
+		DC50F35D1C82FBD0008518EC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC50F35C1C82FBD0008518EC /* Cocoa.framework */; };
+		DCDFA7C51C8C841C003FFBFC /* RegiftOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDFA7C41C8C841C003FFBFC /* RegiftOSX.framework */; };
+		DCDFA7C61C8C841C003FFBFC /* RegiftOSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCDFA7C41C8C841C003FFBFC /* RegiftOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DC50F3561C82FB8E008518EC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DC50F3531C82FB8E008518EC /* RxCocoa.framework in Embed Frameworks */,
+				DC50F3511C82FB8E008518EC /* RxBlocking.framework in Embed Frameworks */,
+				DCDFA7C61C8C841C003FFBFC /* RegiftOSX.framework in Embed Frameworks */,
+				DC50F3551C82FB8E008518EC /* RxSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DC2FD2331C89786300C7CB2A /* Sengiri.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Sengiri.entitlements; sourceTree = "<group>"; };
+		DC373BA11C906A4A0045B99C /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		DC50F31F1C82F446008518EC /* Sengiri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sengiri.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC50F3221C82F446008518EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DC50F3261C82F446008518EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DC50F3291C82F446008518EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC50F32B1C82F446008518EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC50F3321C82F4E1008518EC /* CaptureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
+		DC50F3331C82F4E1008518EC /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
+		DC50F3341C82F4E1008518EC /* CaptureWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureWindow.swift; sourceTree = "<group>"; };
+		DC50F3351C82F4E1008518EC /* CaptureWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureWindowController.swift; sourceTree = "<group>"; };
+		DC50F3361C82F4E1008518EC /* Sengiri.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sengiri.swift; sourceTree = "<group>"; };
+		DC50F3381C82F4E1008518EC /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
+		DC50F3391C82F4E1008518EC /* PreferenceWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
+		DC50F33A1C82F4E1008518EC /* RecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		DC50F33C1C82F4E1008518EC /* WindowInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowInfo.swift; sourceTree = "<group>"; };
+		DC50F33D1C82F4E1008518EC /* WindowInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowInfoManager.swift; sourceTree = "<group>"; };
+		DC50F34B1C82F4E7008518EC /* PreferenceWindowController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PreferenceWindowController.storyboard; sourceTree = "<group>"; };
+		DC50F34D1C82FB8E008518EC /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/Mac/RxBlocking.framework; sourceTree = "<group>"; };
+		DC50F34E1C82FB8E008518EC /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
+		DC50F34F1C82FB8E008518EC /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
+		DC50F3581C82FBB8008518EC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DC50F35A1C82FBC0008518EC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		DC50F35C1C82FBD0008518EC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		DCDFA7C41C8C841C003FFBFC /* RegiftOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RegiftOSX.framework; path = Carthage/Build/Mac/RegiftOSX.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC50F31C1C82F446008518EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC50F35D1C82FBD0008518EC /* Cocoa.framework in Frameworks */,
+				DC50F35B1C82FBC0008518EC /* ImageIO.framework in Frameworks */,
+				DC50F3591C82FBB8008518EC /* AVFoundation.framework in Frameworks */,
+				DC50F3521C82FB8E008518EC /* RxCocoa.framework in Frameworks */,
+				DC50F3501C82FB8E008518EC /* RxBlocking.framework in Frameworks */,
+				DCDFA7C51C8C841C003FFBFC /* RegiftOSX.framework in Frameworks */,
+				DC50F3541C82FB8E008518EC /* RxSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC50F3161C82F446008518EC = {
+			isa = PBXGroup;
+			children = (
+				DC50F3571C82FB97008518EC /* Frameworks */,
+				DC50F3211C82F446008518EC /* Sengiri */,
+				DC50F3201C82F446008518EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC50F3201C82F446008518EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC50F31F1C82F446008518EC /* Sengiri.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC50F3211C82F446008518EC /* Sengiri */ = {
+			isa = PBXGroup;
+			children = (
+				DC2FD2331C89786300C7CB2A /* Sengiri.entitlements */,
+				DC50F3361C82F4E1008518EC /* Sengiri.swift */,
+				DC50F3221C82F446008518EC /* AppDelegate.swift */,
+				DC50F3261C82F446008518EC /* Assets.xcassets */,
+				DC50F3281C82F446008518EC /* Main.storyboard */,
+				DC50F32B1C82F446008518EC /* Info.plist */,
+				DC50F34B1C82F4E7008518EC /* PreferenceWindowController.storyboard */,
+				DC50F3321C82F4E1008518EC /* CaptureView.swift */,
+				DC50F3331C82F4E1008518EC /* CaptureViewController.swift */,
+				DC50F3341C82F4E1008518EC /* CaptureWindow.swift */,
+				DC50F3351C82F4E1008518EC /* CaptureWindowController.swift */,
+				DC50F3381C82F4E1008518EC /* PreferenceViewController.swift */,
+				DC50F3391C82F4E1008518EC /* PreferenceWindowController.swift */,
+				DC50F33A1C82F4E1008518EC /* RecordButton.swift */,
+				DC50F33C1C82F4E1008518EC /* WindowInfo.swift */,
+				DC50F33D1C82F4E1008518EC /* WindowInfoManager.swift */,
+				DC373BA11C906A4A0045B99C /* String.swift */,
+			);
+			path = Sengiri;
+			sourceTree = "<group>";
+		};
+		DC50F3571C82FB97008518EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCDFA7C41C8C841C003FFBFC /* RegiftOSX.framework */,
+				DC50F35C1C82FBD0008518EC /* Cocoa.framework */,
+				DC50F35A1C82FBC0008518EC /* ImageIO.framework */,
+				DC50F3581C82FBB8008518EC /* AVFoundation.framework */,
+				DC50F34D1C82FB8E008518EC /* RxBlocking.framework */,
+				DC50F34E1C82FB8E008518EC /* RxCocoa.framework */,
+				DC50F34F1C82FB8E008518EC /* RxSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC50F31E1C82F446008518EC /* Sengiri */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC50F32E1C82F446008518EC /* Build configuration list for PBXNativeTarget "Sengiri" */;
+			buildPhases = (
+				DC50F31B1C82F446008518EC /* Sources */,
+				DC50F31C1C82F446008518EC /* Frameworks */,
+				DC50F31D1C82F446008518EC /* Resources */,
+				DC50F3561C82FB8E008518EC /* Embed Frameworks */,
+				DCDFA7BF1C8C27FE003FFBFC /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sengiri;
+			productName = Sengiri;
+			productReference = DC50F31F1C82F446008518EC /* Sengiri.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC50F3171C82F446008518EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = nakajijapan;
+				TargetAttributes = {
+					DC50F31E1C82F446008518EC = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = CNE5C4C374;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = DC50F31A1C82F446008518EC /* Build configuration list for PBXProject "Sengiri" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DC50F3161C82F446008518EC;
+			productRefGroup = DC50F3201C82F446008518EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC50F31E1C82F446008518EC /* Sengiri */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DC50F31D1C82F446008518EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC50F3271C82F446008518EC /* Assets.xcassets in Resources */,
+				DC50F34C1C82F4E7008518EC /* PreferenceWindowController.storyboard in Resources */,
+				DC50F32A1C82F446008518EC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DCDFA7BF1C8C27FE003FFBFC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RegiftOSX.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC50F31B1C82F446008518EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC50F3231C82F446008518EC /* AppDelegate.swift in Sources */,
+				DC50F3411C82F4E1008518EC /* CaptureWindow.swift in Sources */,
+				DC50F3491C82F4E1008518EC /* WindowInfo.swift in Sources */,
+				DC50F34A1C82F4E1008518EC /* WindowInfoManager.swift in Sources */,
+				DC50F3461C82F4E1008518EC /* PreferenceWindowController.swift in Sources */,
+				DC50F3421C82F4E1008518EC /* CaptureWindowController.swift in Sources */,
+				DC373BA21C906A4A0045B99C /* String.swift in Sources */,
+				DC50F3451C82F4E1008518EC /* PreferenceViewController.swift in Sources */,
+				DC50F3471C82F4E1008518EC /* RecordButton.swift in Sources */,
+				DC50F3431C82F4E1008518EC /* Sengiri.swift in Sources */,
+				DC50F33F1C82F4E1008518EC /* CaptureView.swift in Sources */,
+				DC50F3401C82F4E1008518EC /* CaptureViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DC50F3281C82F446008518EC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC50F3291C82F446008518EC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DC50F32C1C82F446008518EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DC50F32D1C82F446008518EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DC50F32F1C82F446008518EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sengiri/Sengiri.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = Sengiri/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = net.nakajijapan.Sengiri;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DC50F3301C82F446008518EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sengiri/Sengiri.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = Sengiri/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = net.nakajijapan.Sengiri;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC50F31A1C82F446008518EC /* Build configuration list for PBXProject "Sengiri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC50F32C1C82F446008518EC /* Debug */,
+				DC50F32D1C82F446008518EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC50F32E1C82F446008518EC /* Build configuration list for PBXNativeTarget "Sengiri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC50F32F1C82F446008518EC /* Debug */,
+				DC50F3301C82F446008518EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC50F3171C82F446008518EC /* Project object */;
+}
