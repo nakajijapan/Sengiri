@@ -182,7 +182,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = nakajijapan;
 				TargetAttributes = {
 					DC50F31E1C82F446008518EC = {
@@ -399,6 +399,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.nakajijapan.Sengiri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
