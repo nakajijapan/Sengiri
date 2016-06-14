@@ -10,7 +10,7 @@ import Cocoa
 
 class PreferenceWindowController: NSWindowController {
 
-    @IBAction func toolbarItemForPreferenceDidClick(sender: AnyObject) {
+    @IBAction func toolbarItemForPreferenceDidClick(_ sender: AnyObject) {
         // none
     }
 }

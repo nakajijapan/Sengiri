@@ -14,7 +14,7 @@ import QuartzCore
 import RegiftOSX
 
 let SengiriHomePath = "\(NSHomeDirectory())/Pictures"
-let SengiriSavePath = "\(SengiriHomePath)/\(NSBundle.mainBundle().bundleIdentifier!)"
+let SengiriSavePath = "\(SengiriHomePath)/\(Bundle.main().bundleIdentifier!)"
 
 
 @NSApplicationMain
@@ -28,28 +28,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     var preferenceWindowController:NSWindowController? = nil
 
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         // create working directory
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default()
         do {
-            try fileManager.createDirectoryAtPath("\(SengiriSavePath)", withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(atPath: "\(SengiriSavePath)", withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             print("failed to make directory. error: \(error.description)")
         }
         
         
         // initialize default setting
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "recordButtonDidClick:", name: "CaptureViewRecordButtonDidClick", object: nil)
+        NotificationCenter.default().addObserver(self, selector: "recordButtonDidClick:", name: "CaptureViewRecordButtonDidClick", object: nil)
 
-        let frameCount = NSUserDefaults.standardUserDefaults().floatForKey("GifSecondPerFrame")
+        let frameCount = UserDefaults.standard().float(forKey: "GifSecondPerFrame")
         if frameCount == 0 {
-            NSUserDefaults.standardUserDefaults().setDouble(0.1, forKey: "GifSecondPerFrame")
+            UserDefaults.standard().set(0.1, forKey: "GifSecondPerFrame")
         }
 
-        let delayTime = NSUserDefaults.standardUserDefaults().floatForKey("GifDelayTime")
+        let delayTime = UserDefaults.standard().float(forKey: "GifDelayTime")
         if delayTime == 0.0 {
-            NSUserDefaults.standardUserDefaults().setDouble(0.1, forKey: "GifDelayTime")
+            UserDefaults.standard().set(0.1, forKey: "GifDelayTime")
         }
         
         self.menu.delegate = self
@@ -57,26 +57,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "CaptureViewRecordButtonDidClick", object: nil)
+        NotificationCenter.default().removeObserver(self, name: "CaptureViewRecordButtonDidClick" as NSNotification.Name, object: nil)
     }
     
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     
     // MARK: - Main Menu Actions
    
     @IBOutlet weak var mainMenuItem: NSMenuItem!
-    @IBAction func mainMenuItemDidClick(sender: AnyObject) {
+    @IBAction func mainMenuItemDidClick(_ sender: AnyObject) {
         self.menuItemForCropRecordDidClick(NSMenuItem())
     }
     
-    @IBAction func mainMenuItemForCropWindowToTopWindowDidClic(sender: AnyObject) {
+    @IBAction func mainMenuItemForCropWindowToTopWindowDidClic(_ sender: AnyObject) {
 
         if self.captureController == nil {
 
             let storyBoard = NSStoryboard(name: "Main", bundle: nil)
-            let windowController = storyBoard.instantiateControllerWithIdentifier("CaptureWindowController") as! CaptureWindowController
+            let windowController = storyBoard.instantiateController(withIdentifier: "CaptureWindowController") as! CaptureWindowController
             self.captureController = windowController
 
         }
@@ -89,23 +89,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         }
 
         self.captureController!.showWindow(nil)
-        self.captureController?.window?.makeKeyWindow()
+        self.captureController?.window?.makeKey()
     }
     
-    @IBAction func mainMenuForStopDidClick(sender: AnyObject) {
+    @IBAction func mainMenuForStopDidClick(_ sender: AnyObject) {
         self.menuItemForStopDidClick(NSMenuItem())
     }
     
     // MARK: - NSMenuDelegate
     
-    func menuWillOpen(menu: NSMenu) {
+    func menuWillOpen(_ menu: NSMenu) {
 
         // Highlight
         let progressIndicator = NSProgressIndicator(frame: NSRect(x: 0, y: 0, width: 16, height: 16))
-        progressIndicator.style = NSProgressIndicatorStyle.SpinningStyle
+        progressIndicator.style = NSProgressIndicatorStyle.spinningStyle
         progressIndicator.startAnimation(nil)
-        progressIndicator.controlSize = NSControlSize.SmallControlSize
-        progressIndicator.displayedWhenStopped = false
+        progressIndicator.controlSize = NSControlSize.small
+        progressIndicator.isDisplayedWhenStopped = false
         self.statusItem!.view = progressIndicator
         
         self.menuItemForStopDidClick(NSMenuItem())
@@ -113,39 +113,39 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     
     // MARK: - NSMenu Actions
 
-    func menuItemForCropRecordDidClick(sender: NSMenuItem) {
+    func menuItemForCropRecordDidClick(_ sender: NSMenuItem) {
         
         if self.captureController == nil {
             
             let storyBoard = NSStoryboard(name: "Main", bundle: nil)
-            let windowController = storyBoard.instantiateControllerWithIdentifier("CaptureWindowController") as! CaptureWindowController
+            let windowController = storyBoard.instantiateController(withIdentifier: "CaptureWindowController") as! CaptureWindowController
             self.captureController = windowController
 
         }
 
         self.captureController!.showWindow(nil)
-        self.captureController?.window?.makeKeyWindow()
+        self.captureController?.window?.makeKey()
         
     }
     
-    func menuItemForStopDidClick(sender: NSMenuItem) {
+    func menuItemForStopDidClick(_ sender: NSMenuItem) {
 
         self.captureController?.window?.close()
         self.captureController?.close()
         self.captureController = nil // assign nil because some capture window opens when capture window open in second time
         
-        NSNotificationCenter.defaultCenter().postNotificationName("AppDelegateStopMenuDidClick", object: self, userInfo:nil)
+        NotificationCenter.default().post(name: Notification.Name(rawValue: "AppDelegateStopMenuDidClick"), object: self, userInfo:nil)
         
         if self.videoMovieFileOutput == nil {
             return
         }
-        if self.videoMovieFileOutput.recording {
+        if self.videoMovieFileOutput.isRecording {
             self.videoMovieFileOutput.stopRecording()
         }
         
     }
     
-    @IBAction func mainMenuItemForPreferenceDidClick(sender: NSMenuItem) {
+    @IBAction func mainMenuItemForPreferenceDidClick(_ sender: NSMenuItem) {
         
         if self.preferenceWindowController == nil {
             let storyBoard = NSStoryboard(name: "PreferenceWindowController", bundle: nil)
@@ -155,15 +155,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         }
 
         self.preferenceWindowController!.showWindow(nil)
-        self.preferenceWindowController?.window?.makeKeyWindow()
+        self.preferenceWindowController?.window?.makeKey()
         
     }
 
     // MARK: - Actions
     
-    func recordButtonDidClick(button:NSButton) {
+    func recordButtonDidClick(_ button:NSButton) {
         
-        self.statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
+        self.statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
         self.statusItem!.highlightMode = true
         self.statusItem!.menu = self.menu
         self.statusItem!.image = NSImage(named: "icon_stop")
@@ -205,12 +205,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         self.captureSession.startRunning()
         
         // delete file
-        let fileName = NSBundle.mainBundle().bundleIdentifier!
+        let fileName = Bundle.main().bundleIdentifier!
         let pathString = "\(NSTemporaryDirectory())/\(fileName).mov"
         let schemePathString = "file://\(pathString)"
         
-        if NSFileManager.defaultManager().fileExistsAtPath(pathString) {
-            try! NSFileManager.defaultManager().removeItemAtPath(pathString)
+        if FileManager.default().fileExists(atPath: pathString) {
+            try! FileManager.default().removeItem(atPath: pathString)
         }
         
         if let frame = self.captureController?.window?.frame {
@@ -224,10 +224,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
                 height: frame.height - differencialValue * 2.0
             )
             
-            captureInput.cropRect = optimizeFrame
+            captureInput?.cropRect = optimizeFrame
             
             // start recording
-            self.videoMovieFileOutput.startRecordingToOutputFileURL(NSURL(string: schemePathString), recordingDelegate: self)
+            self.videoMovieFileOutput.startRecording(toOutputFileURL: URL(string: schemePathString), recordingDelegate: self)
         }
         
     }
@@ -235,20 +235,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     
     // MARK: - AVCaptureFileOutputRecordingDelegate
     
-    func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+    func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [AnyObject]!, error: NSError!) {
 
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
-        let dateString = dateFormatter.stringFromDate(NSDate())
+        let dateString = dateFormatter.string(from: Date())
         let pathString = "\(SengiriSavePath)/\(dateString).gif"
-        let schemePathURL = NSURL(string: "file://\(pathString)")!
+        let schemePathURL = URL(string: "file://\(pathString)")!
         
-        if NSFileManager.defaultManager().fileExistsAtPath(pathString) {
-            try! NSFileManager.defaultManager().removeItemAtPath(pathString)
+        if FileManager.default().fileExists(atPath: pathString) {
+            try! FileManager.default().removeItem(atPath: pathString)
         }
         
-        let secondPerFrame = NSUserDefaults.standardUserDefaults().floatForKey("GifSecondPerFrame")
-        let delayTime = NSUserDefaults.standardUserDefaults().floatForKey("GifDelayTime")
+        let secondPerFrame = UserDefaults.standard().float(forKey: "GifSecondPerFrame")
+        let delayTime = UserDefaults.standard().float(forKey: "GifDelayTime")
 
         let regift = Regift(
             sourceFileURL: outputFileURL,
@@ -264,15 +264,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         // hide menu
         self.statusItem!.image = nil
         self.statusItem!.view = nil
-        NSStatusBar.systemStatusBar().removeStatusItem(self.statusItem!)
+        NSStatusBar.system().removeStatusItem(self.statusItem!)
 
-        let url = NSURL(string: "file://\(SengiriSavePath)")!
-        NSWorkspace.sharedWorkspace().openURL(url)
+        let url = URL(string: "file://\(SengiriSavePath)")!
+        NSWorkspace.shared().open(url)
     }
     
-    func frameCount(sourceFileURL:NSURL, secondPerFrame:Float) -> Int {
+    func frameCount(_ sourceFileURL:URL, secondPerFrame:Float) -> Int {
 
-        let asset = AVURLAsset(URL: sourceFileURL, options: nil)
+        let asset = AVURLAsset(url: sourceFileURL, options: nil)
         let movieLength = Float(asset.duration.value) / Float(asset.duration.timescale)
         let frameCount = Int(movieLength / secondPerFrame)
         return frameCount

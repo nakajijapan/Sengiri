@@ -188,6 +188,7 @@
 					DC50F31E1C82F446008518EC = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = CNE5C4C374;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -377,6 +378,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = net.nakajijapan.Sengiri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -397,6 +399,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.nakajijapan.Sengiri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

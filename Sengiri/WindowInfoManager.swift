@@ -10,10 +10,10 @@ import Foundation
 
 class WindowInfoManager {
     
-    class func windowListAboveWindowID(windowID:CGWindowID) -> [WindowInfo] {
+    class func windowListAboveWindowID(_ windowID:CGWindowID) -> [WindowInfo] {
 
         let windowInfosRef = CGWindowListCopyWindowInfo(
-            [CGWindowListOption.OptionOnScreenOnly, CGWindowListOption.OptionOnScreenBelowWindow],
+            [CGWindowListOption.optionOnScreenOnly, CGWindowListOption.optionOnScreenBelowWindow],
             windowID
         )
         
@@ -22,7 +22,7 @@ class WindowInfoManager {
         
         for i in 0..<CFArrayGetCount(windowInfosRef) {
             let lineUnsafePointer:UnsafePointer<Void> = CFArrayGetValueAtIndex(windowInfosRef, i)
-            let lineRef = unsafeBitCast(lineUnsafePointer, CFDictionaryRef.self)
+            let lineRef = unsafeBitCast(lineUnsafePointer, to: CFDictionary.self)
             let dic = lineRef as Dictionary<NSObject, AnyObject>
             
             let info = WindowInfo(item: dic)
