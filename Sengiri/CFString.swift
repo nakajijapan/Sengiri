@@ -3,7 +3,7 @@
 //  Sengiri
 //
 //  Created by nakajijapan on 2017/01/03.
-//  Copyright © 2017年 nakajijapan. All rights reserved.
+//  Copyright © 2017 nakajijapan. All rights reserved.
 //
 
 import Foundation
