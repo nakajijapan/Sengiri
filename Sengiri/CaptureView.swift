@@ -16,9 +16,9 @@ class CaptureView: NSView {
     override func awakeFromNib() {
         
         self.wantsLayer = true
-        self.layer?.backgroundColor = NSColor.clearColor().CGColor
+        self.layer?.backgroundColor = NSColor.clear.cgColor
 
-        NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: "timerAnimation:", userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: "timerAnimation:", userInfo: nil, repeats: true)
 
     }
 
@@ -26,9 +26,9 @@ class CaptureView: NSView {
         super.init(coder: coder)
     }
     
-    override func drawRect(dirtyRect: NSRect) {
+    override func draw(_ dirtyRect: NSRect) {
 
-        super.drawRect(dirtyRect)
+        super.draw(dirtyRect)
         self.drawBox()
 
     }
@@ -42,7 +42,7 @@ class CaptureView: NSView {
         NSColor(deviceRed: 1.0, green: 0.0, blue: 0.0, alpha: 0.8).set()
 
         let path = NSBezierPath(rect: frame)
-        let context = NSGraphicsContext.currentContext()
+        let context = NSGraphicsContext.current()
         context?.saveGraphicsState()
         context?.shouldAntialias = false
 
@@ -61,7 +61,7 @@ class CaptureView: NSView {
 
     }
     
-    func timerAnimation(timer:NSTimer) {
+    func timerAnimation(_ timer:Timer) {
 
         self.needsDisplay = true
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC373BA21C906A4A0045B99C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC373BA11C906A4A0045B99C /* String.swift */; };
+		DC4D8BF91E1B952A00B4DBE6 /* CFString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D8BF81E1B952A00B4DBE6 /* CFString.swift */; };
 		DC50F3231C82F446008518EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3221C82F446008518EC /* AppDelegate.swift */; };
 		DC50F3271C82F446008518EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC50F3261C82F446008518EC /* Assets.xcassets */; };
 		DC50F32A1C82F446008518EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC50F3281C82F446008518EC /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		DC2FD2331C89786300C7CB2A /* Sengiri.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Sengiri.entitlements; sourceTree = "<group>"; };
 		DC373BA11C906A4A0045B99C /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		DC4D8BF81E1B952A00B4DBE6 /* CFString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFString.swift; sourceTree = "<group>"; };
 		DC50F31F1C82F446008518EC /* Sengiri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sengiri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC50F3221C82F446008518EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC50F3261C82F446008518EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				DC50F33C1C82F4E1008518EC /* WindowInfo.swift */,
 				DC50F33D1C82F4E1008518EC /* WindowInfoManager.swift */,
 				DC373BA11C906A4A0045B99C /* String.swift */,
+				DC4D8BF81E1B952A00B4DBE6 /* CFString.swift */,
 			);
 			path = Sengiri;
 			sourceTree = "<group>";
@@ -182,12 +185,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = nakajijapan;
 				TargetAttributes = {
 					DC50F31E1C82F446008518EC = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = CNE5C4C374;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -255,6 +259,7 @@
 				DC50F3231C82F446008518EC /* AppDelegate.swift in Sources */,
 				DC50F3411C82F4E1008518EC /* CaptureWindow.swift in Sources */,
 				DC50F3491C82F4E1008518EC /* WindowInfo.swift in Sources */,
+				DC4D8BF91E1B952A00B4DBE6 /* CFString.swift in Sources */,
 				DC50F34A1C82F4E1008518EC /* WindowInfoManager.swift in Sources */,
 				DC50F3461C82F4E1008518EC /* PreferenceWindowController.swift in Sources */,
 				DC50F3421C82F4E1008518EC /* CaptureWindowController.swift in Sources */,
@@ -294,8 +299,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -322,6 +329,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -338,8 +346,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -358,6 +368,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
@@ -377,6 +388,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = net.nakajijapan.Sengiri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -397,6 +409,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.nakajijapan.Sengiri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};

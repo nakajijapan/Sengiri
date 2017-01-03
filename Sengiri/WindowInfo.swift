@@ -17,12 +17,17 @@ class WindowInfo:NSObject {
     var	layer:Int32?
     var frame:NSRect?
     
-    init(item:Dictionary<NSObject, AnyObject>) {
+    func toString(cfstring: CFString) -> String {
+        let string = cfstring as NSString
+        return string as String
+    }
+    
+    init(item: [String: AnyObject]) {
         super.init()
         
-        self.ownerName = item[kCGWindowOwnerName as String] as? String
-        self.layer = (item[kCGWindowLayer as String] as! NSNumber).intValue
-        let bounds = item[kCGWindowBounds as String] as! Dictionary<String, CGFloat>
+        self.ownerName = item[kCGWindowOwnerName.toString] as? String
+        self.layer = (item[kCGWindowLayer.toString] as! NSNumber).int32Value
+        let bounds = item[kCGWindowBounds.toString] as! Dictionary<String, CGFloat>
         
         let cgFrame = CGRect(x: bounds["X"]!, y: bounds["Y"]!, width: bounds["Width"]!, height: bounds["Height"]!)
 
@@ -40,8 +45,8 @@ class WindowInfo:NSObject {
         self.frame = optimizeFrame
     }
     
-    func convertPosition(frame:NSRect) -> NSPoint {
-        let mainFrame = NSScreen.mainScreen()?.frame;
+    func convertPosition(_ frame:NSRect) -> NSPoint {
+        let mainFrame = NSScreen.main()?.frame;
         var convertedPoint = frame.origin
         
         let y = mainFrame!.height - (frame.origin.y + frame.size.height)
@@ -50,17 +55,17 @@ class WindowInfo:NSObject {
         return convertedPoint
     }
     
-    func isNormalWindow(normal:Bool) -> Bool {
+    func isNormalWindow(_ normal:Bool) -> Bool {
         
         if self.ownerName! == "Dock" {
             return false
         }
         
-        if normal && self.layer == CGWindowLevelForKey(.NormalWindowLevelKey) {
+        if normal && self.layer == CGWindowLevelForKey(.normalWindow) {
             return true
         }
         
-        if normal && self.layer < CGWindowLevelForKey(.MainMenuWindowLevelKey) {
+        if normal && self.layer! < CGWindowLevelForKey(.mainMenuWindow) {
             return true
         }
         

@@ -20,21 +20,22 @@ class PreferenceViewController: NSViewController, NSTextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let secondPerFrame = NSUserDefaults.standardUserDefaults().floatForKey("GifSecondPerFrame")
+        let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
         self.frameCountTextField.doubleValue = Double(Int(secondPerFrame * 1000.0)) * 0.001
         
-        let delayTime = NSUserDefaults.standardUserDefaults().doubleForKey("GifDelayTime")
+        let delayTime = UserDefaults.standard.double(forKey: "GifDelayTime")
         self.delayTimeTextField.doubleValue = Double(Int(delayTime * 1000.0)) * 0.001
 
-        self.frameCountTextField.rx_text.subscribeNext { (text) -> Void in
-            NSUserDefaults.standardUserDefaults().setFloat(text.floatValue, forKey: "GifSecondPerFrame")
-            }.addDisposableTo(self.disposeBag)
+        frameCountTextField.rx.text.subscribe(onNext: { (text) in
+            guard let text = text else { return }
+            UserDefaults.standard.set(text.floatValue, forKey: "GifSecondPerFrame")
+        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(self.disposeBag)
 
         
-        self.delayTimeTextField.rx_text.subscribeNext { (text) -> Void in
-            NSUserDefaults.standardUserDefaults().setFloat(text.floatValue, forKey: "GifDelayTime")
-            }.addDisposableTo(self.disposeBag)
-        
+        delayTimeTextField.rx.text.subscribe(onNext: { (text) in
+            guard let text = text else { return }
+            UserDefaults.standard.set(text.floatValue, forKey: "GifDelayTime")
+        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(self.disposeBag)
 
     }
 
