@@ -16,7 +16,7 @@ class CaptureWindow: NSWindow {
 
         self.isReleasedWhenClosed = true
         self.displaysWhenScreenProfileChanges = true
-        self.backgroundColor = NSColor.clear()
+        self.backgroundColor = NSColor.clear
         self.isOpaque = false
         self.hasShadow = false
         self.collectionBehavior = [.fullScreenPrimary]
@@ -25,26 +25,25 @@ class CaptureWindow: NSWindow {
         self.isMovableByWindowBackground = true
         
         // hide title bar
-        self.styleMask = NSBorderlessWindowMask | NSResizableWindowMask
+        self.styleMask = [NSBorderlessWindowMask, NSResizableWindowMask]
         self.ignoresMouseEvents = false
         
 
         self.level = Int(CGWindowLevelForKey(.floatingWindow))
         
-        
-        NotificationCenter.default().addObserver(self, selector: "recordButtonDidClick:", name: "CaptureViewRecordButtonDidClick", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.recordButtonDidClick(_:)), name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
         
         self.setFrame(NSRect(x: 200, y: 200, width: 500, height: 500), display: true)
 
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
-            self.keyDown(aEvent)
+            self.keyDown(with: aEvent)
             return aEvent
         }
         
     }
     
     deinit {
-        NotificationCenter.default().removeObserver(self, name: "CaptureViewRecordButtonDidClick" as NSNotification.Name, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
     }
 
     // MARK: - Notification
@@ -58,11 +57,7 @@ class CaptureWindow: NSWindow {
 
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func performKeyEquivalent(_ theEvent: NSEvent) -> Bool {
+    override func performKeyEquivalent(with theEvent: NSEvent) -> Bool {
         return false
     }
     

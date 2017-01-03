@@ -21,11 +21,12 @@ class WindowInfoManager {
         
         
         for i in 0..<CFArrayGetCount(windowInfosRef) {
-            let lineUnsafePointer:UnsafePointer<Void> = CFArrayGetValueAtIndex(windowInfosRef, i)
+
+            let lineUnsafePointer: UnsafeRawPointer = CFArrayGetValueAtIndex(windowInfosRef, i)
             let lineRef = unsafeBitCast(lineUnsafePointer, to: CFDictionary.self)
             let dic = lineRef as Dictionary<NSObject, AnyObject>
             
-            let info = WindowInfo(item: dic)
+            let info = WindowInfo(item: dic as! [String : AnyObject])
             
             items.append(info)
         }
@@ -42,8 +43,11 @@ class WindowInfoManager {
             if items[i].isNormalWindow(true) {
                 
                 let item = items[i]
-                let frame = item.frame
-                if frame?.width > 16.0 && frame?.height > 16 {
+                guard let frame = item.frame else {
+                    continue
+                }
+                
+                if frame.width > 16.0 && frame.height > 16 {
                     topWindow = item
                     break
                 }

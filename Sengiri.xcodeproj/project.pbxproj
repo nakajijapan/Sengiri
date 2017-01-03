@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC373BA21C906A4A0045B99C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC373BA11C906A4A0045B99C /* String.swift */; };
+		DC4D8BF91E1B952A00B4DBE6 /* CFString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D8BF81E1B952A00B4DBE6 /* CFString.swift */; };
 		DC50F3231C82F446008518EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50F3221C82F446008518EC /* AppDelegate.swift */; };
 		DC50F3271C82F446008518EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC50F3261C82F446008518EC /* Assets.xcassets */; };
 		DC50F32A1C82F446008518EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC50F3281C82F446008518EC /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		DC2FD2331C89786300C7CB2A /* Sengiri.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Sengiri.entitlements; sourceTree = "<group>"; };
 		DC373BA11C906A4A0045B99C /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		DC4D8BF81E1B952A00B4DBE6 /* CFString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFString.swift; sourceTree = "<group>"; };
 		DC50F31F1C82F446008518EC /* Sengiri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sengiri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC50F3221C82F446008518EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC50F3261C82F446008518EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				DC50F33C1C82F4E1008518EC /* WindowInfo.swift */,
 				DC50F33D1C82F4E1008518EC /* WindowInfoManager.swift */,
 				DC373BA11C906A4A0045B99C /* String.swift */,
+				DC4D8BF81E1B952A00B4DBE6 /* CFString.swift */,
 			);
 			path = Sengiri;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				DC50F3231C82F446008518EC /* AppDelegate.swift in Sources */,
 				DC50F3411C82F4E1008518EC /* CaptureWindow.swift in Sources */,
 				DC50F3491C82F4E1008518EC /* WindowInfo.swift in Sources */,
+				DC4D8BF91E1B952A00B4DBE6 /* CFString.swift in Sources */,
 				DC50F34A1C82F4E1008518EC /* WindowInfoManager.swift in Sources */,
 				DC50F3461C82F4E1008518EC /* PreferenceWindowController.swift in Sources */,
 				DC50F3421C82F4E1008518EC /* CaptureWindowController.swift in Sources */,

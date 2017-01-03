@@ -14,7 +14,7 @@ import QuartzCore
 import RegiftOSX
 
 let SengiriHomePath = "\(NSHomeDirectory())/Pictures"
-let SengiriSavePath = "\(SengiriHomePath)/\(Bundle.main().bundleIdentifier!)"
+let SengiriSavePath = "\(SengiriHomePath)/\(Bundle.main.bundleIdentifier!)"
 
 
 @NSApplicationMain
@@ -27,29 +27,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     var captureController:CaptureWindowController? = nil
     var preferenceWindowController:NSWindowController? = nil
 
+    
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         // create working directory
-        let fileManager = FileManager.default()
+        let fileManager = FileManager.default
         do {
             try fileManager.createDirectory(atPath: "\(SengiriSavePath)", withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             print("failed to make directory. error: \(error.description)")
+     
         }
+        
         
         
         // initialize default setting
-        NotificationCenter.default().addObserver(self, selector: "recordButtonDidClick:", name: "CaptureViewRecordButtonDidClick", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.recordButtonDidClick(_:)), name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
 
-        let frameCount = UserDefaults.standard().float(forKey: "GifSecondPerFrame")
+        let frameCount = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
         if frameCount == 0 {
-            UserDefaults.standard().set(0.1, forKey: "GifSecondPerFrame")
+            UserDefaults.standard.set(0.1, forKey: "GifSecondPerFrame")
         }
 
-        let delayTime = UserDefaults.standard().float(forKey: "GifDelayTime")
+        let delayTime = UserDefaults.standard.float(forKey: "GifDelayTime")
         if delayTime == 0.0 {
-            UserDefaults.standard().set(0.1, forKey: "GifDelayTime")
+            UserDefaults.standard.set(0.1, forKey: "GifDelayTime")
         }
         
         self.menu.delegate = self
@@ -57,7 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     }
     
     deinit {
-        NotificationCenter.default().removeObserver(self, name: "CaptureViewRecordButtonDidClick" as NSNotification.Name, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -134,7 +137,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         self.captureController?.close()
         self.captureController = nil // assign nil because some capture window opens when capture window open in second time
         
-        NotificationCenter.default().post(name: Notification.Name(rawValue: "AppDelegateStopMenuDidClick"), object: self, userInfo:nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "AppDelegateStopMenuDidClick"), object: self, userInfo:nil)
         
         if self.videoMovieFileOutput == nil {
             return
@@ -205,12 +208,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         self.captureSession.startRunning()
         
         // delete file
-        let fileName = Bundle.main().bundleIdentifier!
+        let fileName = Bundle.main.bundleIdentifier!
         let pathString = "\(NSTemporaryDirectory())/\(fileName).mov"
         let schemePathString = "file://\(pathString)"
         
-        if FileManager.default().fileExists(atPath: pathString) {
-            try! FileManager.default().removeItem(atPath: pathString)
+        if FileManager.default.fileExists(atPath: pathString) {
+            try! FileManager.default.removeItem(atPath: pathString)
         }
         
         if let frame = self.captureController?.window?.frame {
@@ -235,7 +238,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     
     // MARK: - AVCaptureFileOutputRecordingDelegate
     
-    func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+    /*!
+     @method captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:
+     @abstract
+     Informs the delegate when all pending data has been written to an output file.
+     
+     @param captureOutput
+     The capture file output that has finished writing the file.
+     @param fileURL
+     The file URL of the file that has been written.
+     @param connections
+     An array of AVCaptureConnection objects attached to the file output that provided the data that was written to the
+     file.
+     @param error
+     An error describing what caused the file to stop recording, or nil if there was no error.
+     
+     @discussion
+     This method is called when the file output has finished writing all data to a file whose recording was stopped,
+     either because startRecordingToOutputFileURL:recordingDelegate: or stopRecording were called, or because an error,
+     described by the error parameter, occurred (if no error occurred, the error parameter will be nil).  This method will
+     always be called for each recording request, even if no data is successfully written to the file.
+     
+     Clients should not assume that this method will be called on a specific thread.
+     
+     Delegates are required to implement this method.
+     */
+    public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
@@ -243,12 +271,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         let pathString = "\(SengiriSavePath)/\(dateString).gif"
         let schemePathURL = URL(string: "file://\(pathString)")!
         
-        if FileManager.default().fileExists(atPath: pathString) {
-            try! FileManager.default().removeItem(atPath: pathString)
+        if FileManager.default.fileExists(atPath: pathString) {
+            try! FileManager.default.removeItem(atPath: pathString)
         }
         
-        let secondPerFrame = UserDefaults.standard().float(forKey: "GifSecondPerFrame")
-        let delayTime = UserDefaults.standard().float(forKey: "GifDelayTime")
+        let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
+        let delayTime = UserDefaults.standard.float(forKey: "GifDelayTime")
 
         let regift = Regift(
             sourceFileURL: outputFileURL,

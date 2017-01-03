@@ -16,7 +16,7 @@ class RecordButton: NSButton {
         
     }
     
-    override func performKeyEquivalent(_ key: NSEvent) -> Bool {
+    override func performKeyEquivalent(with key: NSEvent) -> Bool {
 
         return true
 

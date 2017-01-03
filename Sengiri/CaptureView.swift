@@ -16,7 +16,7 @@ class CaptureView: NSView {
     override func awakeFromNib() {
         
         self.wantsLayer = true
-        self.layer?.backgroundColor = NSColor.clear().cgColor
+        self.layer?.backgroundColor = NSColor.clear.cgColor
 
         Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: "timerAnimation:", userInfo: nil, repeats: true)
 
