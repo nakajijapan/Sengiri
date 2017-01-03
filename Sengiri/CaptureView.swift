@@ -18,7 +18,7 @@ class CaptureView: NSView {
         self.wantsLayer = true
         self.layer?.backgroundColor = NSColor.clear.cgColor
 
-        Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: "timerAnimation:", userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(self.timerAnimation(_:)), userInfo: nil, repeats: true)
 
     }
 
