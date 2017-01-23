@@ -18,16 +18,19 @@ let SengiriSavePath = "\(SengiriHomePath)/\(Bundle.main.bundleIdentifier!)"
 
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
-
-    var statusItem:NSStatusItem?
+class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var menu: NSMenu!
-    
+    @IBOutlet weak var mainMenuItem: NSMenuItem!
+
+    var statusItem:NSStatusItem?
     var captureController:CaptureWindowController? = nil
     var preferenceWindowController:NSWindowController? = nil
-
-    
+    // image
+    var captureSession:AVCaptureSession!
+    var videoStillImageOutput:AVCaptureStillImageOutput!
+    // movie
+    var videoMovieFileOutput:AVCaptureMovieFileOutput!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -39,8 +42,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             print("failed to make directory. error: \(error.description)")
      
         }
-        
-        
         
         // initialize default setting
         NotificationCenter.default.addObserver(self, selector: #selector(self.recordButtonDidClick(_:)), name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
@@ -67,9 +68,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // Insert code here to tear down your application
     }
     
-    // MARK: - Main Menu Actions
-   
-    @IBOutlet weak var mainMenuItem: NSMenuItem!
+}
+
+// MARK: - Main Menu Actions
+
+extension AppDelegate {
+    
     @IBAction func mainMenuItemDidClick(_ sender: AnyObject) {
         self.menuItemForCropRecordDidClick(NSMenuItem())
     }
@@ -98,12 +102,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @IBAction func mainMenuForStopDidClick(_ sender: AnyObject) {
         self.menuItemForStopDidClick(NSMenuItem())
     }
-    
-    // MARK: - NSMenuDelegate
-    
+
+}
+
+// MARK: - NSMenuDelegate
+
+extension AppDelegate: NSMenuDelegate {
+
     func menuWillOpen(_ menu: NSMenu) {
 
-        // Highlight
         let progressIndicator = NSProgressIndicator(frame: NSRect(x: 0, y: 0, width: 16, height: 16))
         progressIndicator.style = NSProgressIndicatorStyle.spinningStyle
         progressIndicator.startAnimation(nil)
@@ -112,9 +119,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.statusItem!.view = progressIndicator
         
         self.menuItemForStopDidClick(NSMenuItem())
+
     }
-    
-    // MARK: - NSMenu Actions
+
+}
+
+// MARK: - NSMenu Actions
+
+extension AppDelegate {
 
     func menuItemForCropRecordDidClick(_ sender: NSMenuItem) {
         
@@ -162,8 +174,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
 
-    // MARK: - Actions
-    
+}
+
+// MARK: - Notifications
+
+extension AppDelegate {
+
     func recordButtonDidClick(_ button:NSButton) {
         
         self.statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
@@ -174,13 +190,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.prapareVideoScreen()
     }
     
-    // image
-    var captureSession:AVCaptureSession!
-    var videoStillImageOutput:AVCaptureStillImageOutput!
-    
-    // movie
-    var videoMovieFileOutput:AVCaptureMovieFileOutput!
-
     func prapareVideoScreen() {
 
         let displayID = CGMainDisplayID()
