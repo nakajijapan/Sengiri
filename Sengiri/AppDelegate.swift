@@ -238,31 +238,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     
     // MARK: - AVCaptureFileOutputRecordingDelegate
     
-    /*!
-     @method captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:
-     @abstract
-     Informs the delegate when all pending data has been written to an output file.
-     
-     @param captureOutput
-     The capture file output that has finished writing the file.
-     @param fileURL
-     The file URL of the file that has been written.
-     @param connections
-     An array of AVCaptureConnection objects attached to the file output that provided the data that was written to the
-     file.
-     @param error
-     An error describing what caused the file to stop recording, or nil if there was no error.
-     
-     @discussion
-     This method is called when the file output has finished writing all data to a file whose recording was stopped,
-     either because startRecordingToOutputFileURL:recordingDelegate: or stopRecording were called, or because an error,
-     described by the error parameter, occurred (if no error occurred, the error parameter will be nil).  This method will
-     always be called for each recording request, even if no data is successfully written to the file.
-     
-     Clients should not assume that this method will be called on a specific thread.
-     
-     Delegates are required to implement this method.
-     */
     public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
 
         let dateFormatter = DateFormatter()
