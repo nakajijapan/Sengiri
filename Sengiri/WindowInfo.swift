@@ -25,14 +25,14 @@ class WindowInfo:NSObject {
     init(item: [String: AnyObject]) {
         super.init()
         
-        self.ownerName = item[kCGWindowOwnerName.toString] as? String
-        self.layer = (item[kCGWindowLayer.toString] as! NSNumber).int32Value
+        ownerName = item[kCGWindowOwnerName.toString] as? String
+        layer = (item[kCGWindowLayer.toString] as! NSNumber).int32Value
         let bounds = item[kCGWindowBounds.toString] as! Dictionary<String, CGFloat>
         
         let cgFrame = CGRect(x: bounds["X"]!, y: bounds["Y"]!, width: bounds["Width"]!, height: bounds["Height"]!)
 
         var frame = NSRectFromCGRect(cgFrame)
-        frame.origin = self.convertPosition(frame)
+        frame.origin = convertPosition(frame)
         
         let differencialValue = CGFloat(SengiriCropViewLineWidth - 2)
         let optimizeFrame = NSRect(
@@ -42,7 +42,7 @@ class WindowInfo:NSObject {
             height: frame.height + differencialValue * 2.0
         )
         
-        self.frame = optimizeFrame
+        frame = optimizeFrame
     }
     
     func convertPosition(_ frame:NSRect) -> NSPoint {
@@ -57,15 +57,15 @@ class WindowInfo:NSObject {
     
     func isNormalWindow(_ normal:Bool) -> Bool {
         
-        if self.ownerName! == "Dock" {
+        if ownerName! == "Dock" {
             return false
         }
         
-        if normal && self.layer == CGWindowLevelForKey(.normalWindow) {
+        if normal && layer == CGWindowLevelForKey(.normalWindow) {
             return true
         }
         
-        if normal && self.layer! < CGWindowLevelForKey(.mainMenuWindow) {
+        if normal && layer! < CGWindowLevelForKey(.mainMenuWindow) {
             return true
         }
         

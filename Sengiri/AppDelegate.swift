@@ -18,16 +18,19 @@ let SengiriSavePath = "\(SengiriHomePath)/\(Bundle.main.bundleIdentifier!)"
 
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecordingDelegate, NSMenuDelegate {
-
-    var statusItem:NSStatusItem?
+class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var menu: NSMenu!
-    
+    @IBOutlet weak var mainMenuItem: NSMenuItem!
+
+    var statusItem:NSStatusItem?
     var captureController:CaptureWindowController? = nil
     var preferenceWindowController:NSWindowController? = nil
-
-    
+    // image
+    var captureSession:AVCaptureSession!
+    var videoStillImageOutput:AVCaptureStillImageOutput!
+    // movie
+    var videoMovieFileOutput:AVCaptureMovieFileOutput!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -39,8 +42,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
             print("failed to make directory. error: \(error.description)")
      
         }
-        
-        
         
         // initialize default setting
         NotificationCenter.default.addObserver(self, selector: #selector(self.recordButtonDidClick(_:)), name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
@@ -67,9 +68,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         // Insert code here to tear down your application
     }
     
-    // MARK: - Main Menu Actions
-   
-    @IBOutlet weak var mainMenuItem: NSMenuItem!
+}
+
+// MARK: - Main Menu Actions
+
+extension AppDelegate {
+    
     @IBAction func mainMenuItemDidClick(_ sender: AnyObject) {
         self.menuItemForCropRecordDidClick(NSMenuItem())
     }
@@ -98,12 +102,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
     @IBAction func mainMenuForStopDidClick(_ sender: AnyObject) {
         self.menuItemForStopDidClick(NSMenuItem())
     }
-    
-    // MARK: - NSMenuDelegate
-    
+
+}
+
+// MARK: - NSMenuDelegate
+
+extension AppDelegate: NSMenuDelegate {
+
     func menuWillOpen(_ menu: NSMenu) {
 
-        // Highlight
         let progressIndicator = NSProgressIndicator(frame: NSRect(x: 0, y: 0, width: 16, height: 16))
         progressIndicator.style = NSProgressIndicatorStyle.spinningStyle
         progressIndicator.startAnimation(nil)
@@ -112,9 +119,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         self.statusItem!.view = progressIndicator
         
         self.menuItemForStopDidClick(NSMenuItem())
+
     }
-    
-    // MARK: - NSMenu Actions
+
+}
+
+// MARK: - NSMenu Actions
+
+extension AppDelegate {
 
     func menuItemForCropRecordDidClick(_ sender: NSMenuItem) {
         
@@ -162,8 +174,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         
     }
 
-    // MARK: - Actions
-    
+}
+
+// MARK: - Notifications
+
+extension AppDelegate {
+
     func recordButtonDidClick(_ button:NSButton) {
         
         self.statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
@@ -174,13 +190,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         self.prapareVideoScreen()
     }
     
-    // image
-    var captureSession:AVCaptureSession!
-    var videoStillImageOutput:AVCaptureStillImageOutput!
-    
-    // movie
-    var videoMovieFileOutput:AVCaptureMovieFileOutput!
-
     func prapareVideoScreen() {
 
         let displayID = CGMainDisplayID()
@@ -235,34 +244,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         
     }
     
+}
+
+// MARK: - AVCaptureFileOutputRecordingDelegate
+
+extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
     
-    // MARK: - AVCaptureFileOutputRecordingDelegate
-    
-    /*!
-     @method captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:
-     @abstract
-     Informs the delegate when all pending data has been written to an output file.
-     
-     @param captureOutput
-     The capture file output that has finished writing the file.
-     @param fileURL
-     The file URL of the file that has been written.
-     @param connections
-     An array of AVCaptureConnection objects attached to the file output that provided the data that was written to the
-     file.
-     @param error
-     An error describing what caused the file to stop recording, or nil if there was no error.
-     
-     @discussion
-     This method is called when the file output has finished writing all data to a file whose recording was stopped,
-     either because startRecordingToOutputFileURL:recordingDelegate: or stopRecording were called, or because an error,
-     described by the error parameter, occurred (if no error occurred, the error parameter will be nil).  This method will
-     always be called for each recording request, even if no data is successfully written to the file.
-     
-     Clients should not assume that this method will be called on a specific thread.
-     
-     Delegates are required to implement this method.
-     */
     public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
 
         let dateFormatter = DateFormatter()
