@@ -18,7 +18,7 @@ let SengiriSavePath = "\(SengiriHomePath)/\(Bundle.main.bundleIdentifier!)"
 
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecordingDelegate, NSMenuDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     var statusItem:NSStatusItem?
 
@@ -235,8 +235,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, AVCaptureFileOutputRecording
         
     }
     
-    
-    // MARK: - AVCaptureFileOutputRecordingDelegate
+}
+
+// MARK: - AVCaptureFileOutputRecordingDelegate
+
+extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
     
     public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
 
