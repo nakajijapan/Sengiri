@@ -11,15 +11,11 @@ import Cocoa
 class RecordButton: NSButton {
 
     func hide() {
-
-        self.isHidden = true
-        
+        isHidden = true
     }
     
     override func performKeyEquivalent(with key: NSEvent) -> Bool {
-
         return true
-
     }
     
 }

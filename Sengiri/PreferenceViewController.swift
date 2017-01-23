@@ -21,21 +21,21 @@ class PreferenceViewController: NSViewController, NSTextFieldDelegate {
         super.viewDidLoad()
 
         let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
-        self.frameCountTextField.doubleValue = Double(Int(secondPerFrame * 1000.0)) * 0.001
+        frameCountTextField.doubleValue = Double(Int(secondPerFrame * 1000.0)) * 0.001
         
         let delayTime = UserDefaults.standard.double(forKey: "GifDelayTime")
-        self.delayTimeTextField.doubleValue = Double(Int(delayTime * 1000.0)) * 0.001
+        delayTimeTextField.doubleValue = Double(Int(delayTime * 1000.0)) * 0.001
 
         frameCountTextField.rx.text.subscribe(onNext: { (text) in
             guard let text = text else { return }
             UserDefaults.standard.set(text.floatValue, forKey: "GifSecondPerFrame")
-        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(self.disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
 
         
         delayTimeTextField.rx.text.subscribe(onNext: { (text) in
             guard let text = text else { return }
             UserDefaults.standard.set(text.floatValue, forKey: "GifDelayTime")
-        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(self.disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
 
     }
 

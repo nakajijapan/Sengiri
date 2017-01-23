@@ -14,23 +14,14 @@ class CaptureView: NSView {
     var phaseCount:CGFloat = 0.0
 
     override func awakeFromNib() {
-        
-        self.wantsLayer = true
-        self.layer?.backgroundColor = NSColor.clear.cgColor
-
-        Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(self.timerAnimation(_:)), userInfo: nil, repeats: true)
-
+        wantsLayer = true
+        layer?.backgroundColor = NSColor.clear.cgColor
+        Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(timerAnimation(_:)), userInfo: nil, repeats: true)
     }
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
     override func draw(_ dirtyRect: NSRect) {
-
         super.draw(dirtyRect)
-        self.drawBox()
-
+        drawBox()
     }
     
     var lineDashStatus = 0
@@ -48,13 +39,13 @@ class CaptureView: NSView {
 
         path.lineWidth = width
         
-        self.phaseCount += 1.0
-        if self.phaseCount >= 6.0 {
-            self.phaseCount = 0.0
+        phaseCount += 1.0
+        if phaseCount >= 6.0 {
+            phaseCount = 0.0
         }
         
         let pattern:[CGFloat] = [3.0, 3.0]
-        path.setLineDash(pattern, count: 2, phase: self.phaseCount)
+        path.setLineDash(pattern, count: 2, phase: phaseCount)
         path.stroke()
         
         context?.restoreGraphicsState()
@@ -63,7 +54,7 @@ class CaptureView: NSView {
     
     func timerAnimation(_ timer:Timer) {
 
-        self.needsDisplay = true
+        needsDisplay = true
 
     }
     
