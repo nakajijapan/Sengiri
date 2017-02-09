@@ -16,9 +16,7 @@ class WindowInfoManager {
             [CGWindowListOption.optionOnScreenOnly, CGWindowListOption.optionOnScreenBelowWindow],
             windowID
         )
-        
-        var items = [WindowInfo]()
-        
+        var items: [WindowInfo] = []
         
         for i in 0..<CFArrayGetCount(windowInfosRef) {
 
@@ -43,11 +41,8 @@ class WindowInfoManager {
             if items[i].isNormalWindow(true) {
                 
                 let item = items[i]
-                guard let frame = item.frame else {
-                    continue
-                }
-                
-                if frame.width > 16.0 && frame.height > 16 {
+                let frame = item.frame
+                if frame.width > 16.0 && frame.height > 16.0 {
                     topWindow = item
                     break
                 }

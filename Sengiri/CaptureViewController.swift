@@ -14,7 +14,10 @@ class CaptureViewController: NSViewController {
     @IBAction func recordButtonDidClick(_ sender: RecordButton) {
         
         sender.hide()
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: self, userInfo:["button": sender])
+        NotificationCenter.default.post(
+            name: Notification.Name(rawValue: "CaptureViewRecordButtonDidClick"),
+            object: self, userInfo:["button": sender]
+        )
 
     }
     

@@ -31,7 +31,12 @@ class CaptureWindow: NSWindow {
 
         level = Int(CGWindowLevelForKey(.floatingWindow))
         
-        NotificationCenter.default.addObserver(self, selector: #selector(recordButtonDidClick(_:)), name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(recordButtonDidClick(_:)),
+            name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"),
+            object: nil
+        )
         
         setFrame(NSRect(x: 200, y: 200, width: 500, height: 500), display: true)
 
@@ -43,7 +48,10 @@ class CaptureWindow: NSWindow {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
+        NotificationCenter.default.removeObserver(
+            self, name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"),
+            object: nil
+        )
     }
 
     // MARK: - Notification
