@@ -9,44 +9,38 @@
 import Foundation
 import Cocoa
 
-class WindowInfo:NSObject {
-    var order:Int?
-    var windowID:CGWindowID?
-    var windowName:String?
-    var ownerName:String?
-    var	layer:Int32?
-    var frame:NSRect?
-    
-    func toString(cfstring: CFString) -> String {
-        let string = cfstring as NSString
-        return string as String
-    }
+struct WindowInfo {
+    var order: Int?
+    var windowID: CGWindowID?
+    var windowName = ""
+    var ownerName = ""
+    var layer: Int32 = 0
+    var frame = NSRect.zero
     
     init(item: [String: AnyObject]) {
-        super.init()
-        
-        ownerName = item[kCGWindowOwnerName.toString] as? String
+
+        ownerName = item[kCGWindowOwnerName.toString] as? String ?? ""
         layer = (item[kCGWindowLayer.toString] as! NSNumber).int32Value
         let bounds = item[kCGWindowBounds.toString] as! Dictionary<String, CGFloat>
         
         let cgFrame = CGRect(x: bounds["X"]!, y: bounds["Y"]!, width: bounds["Width"]!, height: bounds["Height"]!)
 
-        var frame = NSRectFromCGRect(cgFrame)
-        frame.origin = convertPosition(frame)
+        var windowFrame = NSRectFromCGRect(cgFrame)
+        windowFrame.origin = convertPosition(windowFrame)
         
         let differencialValue = CGFloat(SengiriCropViewLineWidth - 2)
         let optimizeFrame = NSRect(
-            x: frame.origin.x - differencialValue,
-            y: frame.origin.y - differencialValue,
-            width: frame.width + differencialValue * 2.0,
-            height: frame.height + differencialValue * 2.0
+            x: windowFrame.origin.x - differencialValue,
+            y: windowFrame.origin.y - differencialValue,
+            width: windowFrame.width + differencialValue * 2.0,
+            height: windowFrame.height + differencialValue * 2.0
         )
-        
+
         frame = optimizeFrame
     }
     
     func convertPosition(_ frame:NSRect) -> NSPoint {
-        let mainFrame = NSScreen.main()?.frame;
+        let mainFrame = NSScreen.main()?.frame
         var convertedPoint = frame.origin
         
         let y = mainFrame!.height - (frame.origin.y + frame.size.height)
@@ -57,7 +51,7 @@ class WindowInfo:NSObject {
     
     func isNormalWindow(_ normal:Bool) -> Bool {
         
-        if ownerName! == "Dock" {
+        if ownerName == "Dock" {
             return false
         }
         
@@ -65,7 +59,7 @@ class WindowInfo:NSObject {
             return true
         }
         
-        if normal && layer! < CGWindowLevelForKey(.mainMenuWindow) {
+        if normal && layer < CGWindowLevelForKey(.mainMenuWindow) {
             return true
         }
         

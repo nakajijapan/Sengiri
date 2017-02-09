@@ -16,7 +16,6 @@ import RegiftOSX
 let SengiriHomePath = "\(NSHomeDirectory())/Pictures"
 let SengiriSavePath = "\(SengiriHomePath)/\(Bundle.main.bundleIdentifier!)"
 
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -40,11 +39,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try fileManager.createDirectory(atPath: "\(SengiriSavePath)", withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             print("failed to make directory. error: \(error.description)")
-     
         }
         
         // initialize default setting
-        NotificationCenter.default.addObserver(self, selector: #selector(self.recordButtonDidClick(_:)), name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.recordButtonDidClick(_:)),
+            name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"),
+            object: nil
+        )
 
         let frameCount = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
         if frameCount == 0 {
@@ -80,27 +83,24 @@ extension AppDelegate {
     
     @IBAction func mainMenuItemForCropWindowToTopWindowDidClic(_ sender: AnyObject) {
 
-        if self.captureController == nil {
-
+        if captureController == nil {
             let storyBoard = NSStoryboard(name: "Main", bundle: nil)
             let windowController = storyBoard.instantiateController(withIdentifier: "CaptureWindowController") as! CaptureWindowController
-            self.captureController = windowController
+            captureController = windowController
 
         }
         
         if let windowInfo = WindowInfoManager.topWindowInfo() {
-
-            let frame = windowInfo.frame!
-            self.captureController!.window!.setFrame(frame, display: true, animate: true)
-
+            let frame = windowInfo.frame
+            captureController?.window?.setFrame(frame, display: true, animate: true)
         }
 
-        self.captureController!.showWindow(nil)
-        self.captureController?.window?.makeKey()
+        captureController?.showWindow(nil)
+        captureController?.window?.makeKey()
     }
     
     @IBAction func mainMenuForStopDidClick(_ sender: AnyObject) {
-        self.menuItemForStopDidClick(NSMenuItem())
+        menuItemForStopDidClick(NSMenuItem())
     }
 
 }

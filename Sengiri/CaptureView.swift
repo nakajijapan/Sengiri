@@ -10,8 +10,9 @@ import Cocoa
 
 class CaptureView: NSView {
 
-    var trackingArea:NSTrackingArea?
-    var phaseCount:CGFloat = 0.0
+    var trackingArea: NSTrackingArea?
+    var phaseCount: CGFloat = 0.0
+    var lineDashStatus = 0
 
     override func awakeFromNib() {
         wantsLayer = true
@@ -24,7 +25,6 @@ class CaptureView: NSView {
         drawBox()
     }
     
-    var lineDashStatus = 0
     
     func drawBox() {
         let frame = self.frame
