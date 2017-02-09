@@ -19,7 +19,7 @@ struct WindowInfo {
     
     init(item: [String: AnyObject]) {
 
-        ownerName = item[kCGWindowOwnerName.toString] as! String
+        ownerName = item[kCGWindowOwnerName.toString] as? String ?? ""
         layer = (item[kCGWindowLayer.toString] as! NSNumber).int32Value
         let bounds = item[kCGWindowBounds.toString] as! Dictionary<String, CGFloat>
         
