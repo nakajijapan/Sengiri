@@ -219,7 +219,6 @@ extension AppDelegate {
         }
         
         if let frame = self.captureController?.window?.frame {
-            
             // cropping
             let differencialValue = CGFloat(SengiriCropViewLineWidth)
             let optimizeFrame = NSRect(
@@ -277,13 +276,10 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
     }
     
     func frameCount(_ sourceFileURL:URL, secondPerFrame:Float) -> Int {
-
         let asset = AVURLAsset(url: sourceFileURL, options: nil)
         let movieLength = Float(asset.duration.value) / Float(asset.duration.timescale)
         let frameCount = Int(movieLength / secondPerFrame)
         return frameCount
-        
     }
-
 }
 
