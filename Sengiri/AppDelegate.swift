@@ -119,7 +119,6 @@ extension AppDelegate: NSMenuDelegate {
         self.statusItem!.view = progressIndicator
         
         self.menuItemForStopDidClick(NSMenuItem())
-
     }
 
 }
@@ -202,11 +201,7 @@ extension AppDelegate {
         if self.captureSession.canAddInput(captureInput) {
             self.captureSession.addInput(captureInput)
         }
-        
-        if self.captureSession.canAddOutput(self.videoStillImageOutput) {
-            self.captureSession.addOutput(self.videoStillImageOutput)
-        }
-        
+
         if self.captureSession.canAddOutput(self.videoMovieFileOutput) {
             self.captureSession.addOutput(self.videoMovieFileOutput)
         }
@@ -248,22 +243,17 @@ extension AppDelegate {
 
 extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        Swift.print("didFinishRecordingTo")
-    }
-    
-    
-    public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
         let dateString = dateFormatter.string(from: Date())
         let pathString = "\(SengiriSavePath)/\(dateString).gif"
         let schemePathURL = URL(string: "file://\(pathString)")!
-        
+
         if FileManager.default.fileExists(atPath: pathString) {
             try! FileManager.default.removeItem(atPath: pathString)
         }
-        
+
         let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
         let delayTime = UserDefaults.standard.float(forKey: "GifDelayTime")
 
@@ -274,9 +264,8 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
             delayTime: delayTime,
             loopCount: 0
         )
-        
-        let gifmovieURL = regift.createGif()
-        //print("Gif saved to \(gifmovieURL)")
+
+        _ = regift.createGif()
 
         // hide menu
         self.statusItem!.image = nil
