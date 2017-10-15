@@ -33,7 +33,7 @@ class CaptureView: NSView {
         NSColor(deviceRed: 1.0, green: 0.0, blue: 0.0, alpha: 0.8).set()
 
         let path = NSBezierPath(rect: frame)
-        let context = NSGraphicsContext.current()
+        let context = NSGraphicsContext.current
         context?.saveGraphicsState()
         context?.shouldAntialias = false
 
@@ -52,7 +52,7 @@ class CaptureView: NSView {
 
     }
     
-    func timerAnimation(_ timer:Timer) {
+    @objc func timerAnimation(_ timer:Timer) {
 
         needsDisplay = true
 
