@@ -8,10 +8,11 @@
 import Foundation
 import Cocoa
 import CoreGraphics
+import IOKit
 
 class CaptureWindow: NSWindow {
     
-    override init(contentRect: NSRect, styleMask aStyle: NSWindowStyleMask, backing bufferingType: NSBackingStoreType, defer flag: Bool) {
+    override init(contentRect: NSRect, styleMask aStyle: NSWindow.StyleMask, backing bufferingType: NSWindow.BackingStoreType, defer flag: Bool) {
         super.init(contentRect: contentRect, styleMask: aStyle, backing: bufferingType, defer: flag)
 
         isReleasedWhenClosed = true
@@ -25,11 +26,8 @@ class CaptureWindow: NSWindow {
         isMovableByWindowBackground = true
         
         // hide title bar
-        styleMask = [NSBorderlessWindowMask, NSResizableWindowMask]
+        styleMask = [NSWindow.StyleMask.borderless, NSWindow.StyleMask.resizable]
         ignoresMouseEvents = false
-        
-
-        level = Int(CGWindowLevelForKey(.floatingWindow))
         
         NotificationCenter.default.addObserver(
             self,
@@ -37,7 +35,14 @@ class CaptureWindow: NSWindow {
             name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"),
             object: nil
         )
-        
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didMoved(_:)),
+            name: NSNotification.Name(rawValue: "NSWindowDidMoveNotification"),
+            object: nil
+        )
+
         setFrame(NSRect(x: 200, y: 200, width: 500, height: 500), display: true)
 
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
@@ -46,7 +51,12 @@ class CaptureWindow: NSWindow {
         }
         
     }
-    
+
+    @objc func didMoved(_ sender: Any) {
+
+    }
+
+
     deinit {
         NotificationCenter.default.removeObserver(
             self, name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"),
@@ -56,7 +66,7 @@ class CaptureWindow: NSWindow {
 
     // MARK: - Notification
     
-    func recordButtonDidClick(_ notification:Notification) {
+    @objc func recordButtonDidClick(_ notification:Notification) {
 
         var frame = self.frame
         frame.size.height += 0.25
