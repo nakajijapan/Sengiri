@@ -29,14 +29,12 @@ class PreferenceViewController: NSViewController, NSTextFieldDelegate {
         frameCountTextField.rx.text.subscribe(onNext: { (text) in
             guard let text = text else { return }
             UserDefaults.standard.set(text.floatValue, forKey: "GifSecondPerFrame")
-        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        
         delayTimeTextField.rx.text.subscribe(onNext: { (text) in
             guard let text = text else { return }
             UserDefaults.standard.set(text.floatValue, forKey: "GifDelayTime")
-        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
     }
-
 }
