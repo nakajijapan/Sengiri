@@ -58,6 +58,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if delayTime == 0.0 {
             UserDefaults.standard.set(0.1, forKey: "GifDelayTime")
         }
+
+        let compressionRate = UserDefaults.standard.float(forKey: "GifCompressionRate")
+        if compressionRate == 0.0 {
+            UserDefaults.standard.set(0.5, forKey: "GifCompressionRate")
+        }
         
         self.menu.delegate = self
 
@@ -195,9 +200,8 @@ extension AppDelegate {
         self.videoMovieFileOutput = AVCaptureMovieFileOutput()
 
         let captureInput = AVCaptureScreenInput(displayID: displayID)
-        
         self.captureSession = AVCaptureSession()
-        
+
         if self.captureSession.canAddInput(captureInput) {
             self.captureSession.addInput(captureInput)
         }
@@ -255,13 +259,25 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
 
         let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
         let delayTime = UserDefaults.standard.float(forKey: "GifDelayTime")
+        let compressionRate = CGFloat(UserDefaults.standard.float(forKey: "GifCompressionRate"))
+
+        guard let track = AVAsset(url: outputFileURL).tracks(withMediaType: AVMediaType.video).first else { return }
+        var size = track.naturalSize.applying(track.preferredTransform)
+        let compressionTargetSide: CGFloat = 1000
+        if size.width >= compressionTargetSide || size.height >= compressionTargetSide {
+            size.width = size.width * compressionRate
+            size.height = size.height * compressionRate
+        }
+
 
         let regift = Regift(
             sourceFileURL: outputFileURL,
             destinationFileURL: schemePathURL,
             frameCount: self.frameCount(outputFileURL, secondPerFrame: secondPerFrame),
             delayTime: delayTime,
-            loopCount: 0
+            loopCount: 0,
+            width: Int(size.width),
+            height: Int(size.height)
         )
 
         _ = regift.createGif()
@@ -282,4 +298,3 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
         return frameCount
     }
 }
-

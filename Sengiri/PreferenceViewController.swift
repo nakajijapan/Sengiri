@@ -15,6 +15,7 @@ class PreferenceViewController: NSViewController, NSTextFieldDelegate {
 
     @IBOutlet weak var frameCountTextField: NSTextField!
     @IBOutlet weak var delayTimeTextField: NSTextField!
+    @IBOutlet weak var compressionRateTextField: NSTextField!
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -26,17 +27,23 @@ class PreferenceViewController: NSViewController, NSTextFieldDelegate {
         let delayTime = UserDefaults.standard.double(forKey: "GifDelayTime")
         delayTimeTextField.doubleValue = Double(Int(delayTime * 1000.0)) * 0.001
 
-        frameCountTextField.rx.text.subscribe(onNext: { (text) in
+        let compressionRate = UserDefaults.standard.double(forKey: "GifCompressionRate")
+        compressionRateTextField.doubleValue = Double(Int(compressionRate * 1000.0)) * 0.001
+
+        frameCountTextField.rx.text.subscribe(onNext: { text in
             guard let text = text else { return }
             UserDefaults.standard.set(text.floatValue, forKey: "GifSecondPerFrame")
-        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        
-        delayTimeTextField.rx.text.subscribe(onNext: { (text) in
+        delayTimeTextField.rx.text.subscribe(onNext: { text in
             guard let text = text else { return }
             UserDefaults.standard.set(text.floatValue, forKey: "GifDelayTime")
-        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+        compressionRateTextField.rx.text.subscribe(onNext: { text in
+            guard let text = text else { return }
+            UserDefaults.standard.set(text.floatValue, forKey: "GifCompressionRate")
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
     }
-
 }
