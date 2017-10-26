@@ -195,9 +195,8 @@ extension AppDelegate {
         self.videoMovieFileOutput = AVCaptureMovieFileOutput()
 
         let captureInput = AVCaptureScreenInput(displayID: displayID)
-        
         self.captureSession = AVCaptureSession()
-        
+
         if self.captureSession.canAddInput(captureInput) {
             self.captureSession.addInput(captureInput)
         }
@@ -253,6 +252,15 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
             try! FileManager.default.removeItem(atPath: pathString)
         }
 
+        guard let track = AVAsset(url: outputFileURL).tracks(withMediaType: AVMediaType.video).first else { return }
+        var size = track.naturalSize.applying(track.preferredTransform)
+        let compressionTargetSide: CGFloat = 1000
+        let compressionRate: CGFloat = 0.5
+        if size.width >= compressionTargetSide || size.height >= compressionTargetSide {
+            size.width = size.width * compressionRate
+            size.height = size.height * compressionRate
+        }
+
         let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
         let delayTime = UserDefaults.standard.float(forKey: "GifDelayTime")
 
@@ -261,7 +269,9 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
             destinationFileURL: schemePathURL,
             frameCount: self.frameCount(outputFileURL, secondPerFrame: secondPerFrame),
             delayTime: delayTime,
-            loopCount: 0
+            loopCount: 0,
+            width: Int(size.width),
+            height: Int(size.height)
         )
 
         _ = regift.createGif()
@@ -282,4 +292,3 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
         return frameCount
     }
 }
-
