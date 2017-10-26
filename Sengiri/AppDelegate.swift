@@ -58,6 +58,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if delayTime == 0.0 {
             UserDefaults.standard.set(0.1, forKey: "GifDelayTime")
         }
+
+        let compressionRate = UserDefaults.standard.float(forKey: "GifCompressionRate")
+        if compressionRate == 0.0 {
+            UserDefaults.standard.set(0.5, forKey: "GifCompressionRate")
+        }
         
         self.menu.delegate = self
 
@@ -252,17 +257,18 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
             try! FileManager.default.removeItem(atPath: pathString)
         }
 
+        let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
+        let delayTime = UserDefaults.standard.float(forKey: "GifDelayTime")
+        let compressionRate = CGFloat(UserDefaults.standard.float(forKey: "GifCompressionRate"))
+
         guard let track = AVAsset(url: outputFileURL).tracks(withMediaType: AVMediaType.video).first else { return }
         var size = track.naturalSize.applying(track.preferredTransform)
         let compressionTargetSide: CGFloat = 1000
-        let compressionRate: CGFloat = 0.5
         if size.width >= compressionTargetSide || size.height >= compressionTargetSide {
             size.width = size.width * compressionRate
             size.height = size.height * compressionRate
         }
 
-        let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
-        let delayTime = UserDefaults.standard.float(forKey: "GifDelayTime")
 
         let regift = Regift(
             sourceFileURL: outputFileURL,
