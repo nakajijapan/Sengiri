@@ -160,6 +160,7 @@ extension AppDelegate {
         }
         if self.videoMovieFileOutput.isRecording {
             self.videoMovieFileOutput.stopRecording()
+            self.captureSession.stopRunning()
         }
         
     }
