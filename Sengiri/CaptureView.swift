@@ -28,7 +28,7 @@ class CaptureView: NSView {
     
     func drawBox() {
         let frame = self.frame
-        let width = CGFloat(SengiriCropViewLineWidth)
+        let width = SengiriCropViewLineWidth
 
         NSColor(deviceRed: 1.0, green: 0.0, blue: 0.0, alpha: 0.8).set()
 

@@ -34,7 +34,7 @@ class WindowInfoManager {
     
     class func topWindowInfo() -> WindowInfo? {
         var topWindow:WindowInfo?
-        let items = self.windowListAboveWindowID(CGWindowID(0))
+        let items = windowListAboveWindowID(CGWindowID(0))
         
         for i in 0..<items.count {
             

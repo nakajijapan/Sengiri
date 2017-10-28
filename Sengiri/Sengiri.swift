@@ -8,4 +8,4 @@
 
 import Foundation
 
-let SengiriCropViewLineWidth = 3
+let SengiriCropViewLineWidth: CGFloat = 6.0

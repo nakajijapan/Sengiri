@@ -36,26 +36,8 @@ class CaptureWindow: NSWindow {
             object: nil
         )
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didMoved(_:)),
-            name: NSNotification.Name(rawValue: "NSWindowDidMoveNotification"),
-            object: nil
-        )
-
         setFrame(NSRect(x: 200, y: 200, width: 500, height: 500), display: true)
-
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
-            self.keyDown(with: aEvent)
-            return aEvent
-        }
-        
     }
-
-    @objc func didMoved(_ sender: Any) {
-
-    }
-
 
     deinit {
         NotificationCenter.default.removeObserver(
@@ -65,18 +47,14 @@ class CaptureWindow: NSWindow {
     }
 
     // MARK: - Notification
-    
     @objc func recordButtonDidClick(_ notification:Notification) {
-
         var frame = self.frame
         frame.size.height += 0.25
         setFrame(frame, display: true)
         ignoresMouseEvents = true
-
     }
     
     override func performKeyEquivalent(with theEvent: NSEvent) -> Bool {
         return false
     }
-    
 }

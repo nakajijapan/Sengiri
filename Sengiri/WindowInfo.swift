@@ -28,7 +28,7 @@ struct WindowInfo {
         var windowFrame = NSRectFromCGRect(cgFrame)
         windowFrame.origin = convertPosition(windowFrame)
         
-        let differencialValue = CGFloat(SengiriCropViewLineWidth - 2)
+        let differencialValue = SengiriCropViewLineWidth - CGFloat(2)
         let optimizeFrame = NSRect(
             x: windowFrame.origin.x - differencialValue,
             y: windowFrame.origin.y - differencialValue,
