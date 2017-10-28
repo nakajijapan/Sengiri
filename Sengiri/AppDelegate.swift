@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // initialize default setting
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.recordButtonDidClick(_:)),
+            selector: #selector(recordButtonDidClick(_:)),
             name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"),
             object: nil
         )
@@ -64,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             UserDefaults.standard.set(0.5, forKey: "GifCompressionRate")
         }
         
-        self.menu.delegate = self
+        menu.delegate = self
 
     }
     
@@ -87,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 extension AppDelegate {
     
     @IBAction func mainMenuItemDidClick(_ sender: AnyObject) {
-        self.menuItemForCropRecordDidClick(NSMenuItem())
+        menuItemForCropRecordDidClick(NSMenuItem())
     }
     
     @IBAction func mainMenuItemForCropWindowToTopWindowDidClic(_ sender: AnyObject) {
@@ -123,9 +123,9 @@ extension AppDelegate: NSMenuDelegate {
         progressIndicator.startAnimation(nil)
         progressIndicator.controlSize = NSControl.ControlSize.small
         progressIndicator.isDisplayedWhenStopped = false
-        self.statusItem!.view = progressIndicator
+        statusItem!.view = progressIndicator
         
-        self.menuItemForStopDidClick(NSMenuItem())
+        menuItemForStopDidClick(NSMenuItem())
     }
 
 }
@@ -136,46 +136,46 @@ extension AppDelegate {
 
     func menuItemForCropRecordDidClick(_ sender: NSMenuItem) {
         
-        if self.captureController == nil {
+        if captureController == nil {
             let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
             let windowController = storyBoard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "CaptureWindowController")) as! CaptureWindowController
-            self.captureController = windowController
+            captureController = windowController
         }
 
-        self.captureController!.showWindow(nil)
-        self.captureController?.window?.makeKey()
+        captureController!.showWindow(nil)
+        captureController?.window?.makeKey()
         
     }
     
     func menuItemForStopDidClick(_ sender: NSMenuItem) {
 
-        self.captureController?.window?.close()
-        self.captureController?.close()
-        self.captureController = nil // assign nil because some capture window opens when capture window open in second time
+        captureController?.window?.close()
+        captureController?.close()
+        captureController = nil // assign nil because some capture window opens when capture window open in second time
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "AppDelegateStopMenuDidClick"), object: self, userInfo:nil)
         
-        if self.videoMovieFileOutput == nil {
+        if videoMovieFileOutput == nil {
             return
         }
-        if self.videoMovieFileOutput.isRecording {
-            self.videoMovieFileOutput.stopRecording()
-            self.captureSession.stopRunning()
+        if videoMovieFileOutput.isRecording {
+            videoMovieFileOutput.stopRecording()
+            captureSession.stopRunning()
         }
         
     }
     
     @IBAction func mainMenuItemForPreferenceDidClick(_ sender: NSMenuItem) {
         
-        if self.preferenceWindowController == nil {
+        if preferenceWindowController == nil {
             let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "PreferenceWindowController"), bundle: nil)
             let windowController = storyBoard.instantiateInitialController() as! NSWindowController
             windowController.showWindow(self)
-            self.preferenceWindowController = windowController
+            preferenceWindowController = windowController
         }
 
-        self.preferenceWindowController!.showWindow(nil)
-        self.preferenceWindowController?.window?.makeKey()
+        preferenceWindowController!.showWindow(nil)
+        preferenceWindowController?.window?.makeKey()
         
     }
 
@@ -187,16 +187,16 @@ extension AppDelegate {
 
     @objc func recordButtonDidClick(_ button:NSButton) {
         
-        self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        self.statusItem!.highlightMode = true
-        self.statusItem!.menu = self.menu
-        self.statusItem!.image = NSImage(named: NSImage.Name(rawValue: "icon_stop"))
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        statusItem!.highlightMode = true
+        statusItem!.menu = menu
+        statusItem!.image = NSImage(named: NSImage.Name(rawValue: "icon_stop"))
 
-        self.prapareVideoScreen()
+        prapareVideoScreen()
     }
 
     var currentDisplayID: CGDirectDisplayID {
-        guard let screen = self.captureController?.window?.screen else {
+        guard let screen = captureController?.window?.screen else {
             fatalError("Can not find screen info")
         }
 
@@ -208,7 +208,7 @@ extension AppDelegate {
     }
 
     var currentSize: NSSize {
-        guard let screen = self.captureController?.window?.screen else {
+        guard let screen = captureController?.window?.screen else {
             fatalError("Can not find screen info")
         }
 
@@ -219,21 +219,21 @@ extension AppDelegate {
     }
     
     func prapareVideoScreen() {
-        self.videoMovieFileOutput = AVCaptureMovieFileOutput()
+        videoMovieFileOutput = AVCaptureMovieFileOutput()
 
         let captureInput = AVCaptureScreenInput(displayID: currentDisplayID)
-        self.captureSession = AVCaptureSession()
+        captureSession = AVCaptureSession()
 
-        if self.captureSession.canAddInput(captureInput) {
-            self.captureSession.addInput(captureInput)
+        if captureSession.canAddInput(captureInput) {
+            captureSession.addInput(captureInput)
         }
 
-        if self.captureSession.canAddOutput(self.videoMovieFileOutput) {
-            self.captureSession.addOutput(self.videoMovieFileOutput)
+        if captureSession.canAddOutput(videoMovieFileOutput) {
+            captureSession.addOutput(videoMovieFileOutput)
         }
         
         // Start running the session
-        self.captureSession.startRunning()
+        captureSession.startRunning()
         
         // delete file
         let fileName = Bundle.main.bundleIdentifier!
@@ -244,7 +244,7 @@ extension AppDelegate {
             try! FileManager.default.removeItem(atPath: pathString)
         }
         
-        if let frame = self.captureController?.window?.frame {
+        if let frame = captureController?.window?.frame {
 
             let quartzScreenFrame = CGDisplayBounds(currentDisplayID)
             let x = frame.origin.x - quartzScreenFrame.origin.x
@@ -262,7 +262,7 @@ extension AppDelegate {
             captureInput.cropRect = optimizeFrame
             
             // start recording
-            self.videoMovieFileOutput.startRecording(to: URL(string: schemePathString)!, recordingDelegate: self)
+            videoMovieFileOutput.startRecording(to: URL(string: schemePathString)!, recordingDelegate: self)
         }
         
     }
@@ -299,7 +299,7 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
         let regift = Regift(
             sourceFileURL: outputFileURL,
             destinationFileURL: schemePathURL,
-            frameCount: self.frameCount(outputFileURL, secondPerFrame: secondPerFrame),
+            frameCount: frameCount(outputFileURL, secondPerFrame: secondPerFrame),
             delayTime: delayTime,
             loopCount: 0,
             width: Int(size.width),
@@ -309,9 +309,9 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
         _ = regift.createGif()
 
         // hide menu
-        self.statusItem!.image = nil
-        self.statusItem!.view = nil
-        NSStatusBar.system.removeStatusItem(self.statusItem!)
+        statusItem!.image = nil
+        statusItem!.view = nil
+        NSStatusBar.system.removeStatusItem(statusItem!)
 
         let url = URL(string: "file://\(SengiriSavePath)")!
         NSWorkspace.shared.open(url)
