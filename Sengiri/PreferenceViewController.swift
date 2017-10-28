@@ -21,7 +21,7 @@ class PreferenceViewController: NSViewController, NSTextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let secondPerFrame = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
+        let secondPerFrame = UserDefaults.standard.double(forKey: "GifSecondPerFrame")
         frameCountTextField.doubleValue = Double(Int(secondPerFrame * 1000.0)) * 0.001
         
         let delayTime = UserDefaults.standard.double(forKey: "GifDelayTime")

@@ -49,7 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             object: nil
         )
 
-        let frameCount = UserDefaults.standard.float(forKey: "GifSecondPerFrame")
+        let frameCount = UserDefaults.standard.double(forKey: "GifSecondPerFrame")
         if frameCount == 0 {
             UserDefaults.standard.set(0.1, forKey: "GifSecondPerFrame")
         }
@@ -69,7 +69,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"), object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(rawValue: "CaptureViewRecordButtonDidClick"),
+            object: nil
+        )
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -87,7 +91,6 @@ extension AppDelegate {
     }
     
     @IBAction func mainMenuItemForCropWindowToTopWindowDidClic(_ sender: AnyObject) {
-
         if captureController == nil {
             let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
             let windowController = storyBoard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "CaptureWindowController")) as! CaptureWindowController
@@ -115,7 +118,6 @@ extension AppDelegate {
 extension AppDelegate: NSMenuDelegate {
 
     func menuWillOpen(_ menu: NSMenu) {
-
         let progressIndicator = NSProgressIndicator(frame: NSRect(x: 0, y: 0, width: 16, height: 16))
         progressIndicator.style = NSProgressIndicator.Style.spinning
         progressIndicator.startAnimation(nil)
@@ -191,15 +193,34 @@ extension AppDelegate {
 
         self.prapareVideoScreen()
     }
+
+    var currentDisplayID: CGDirectDisplayID {
+        guard let screen = self.captureController?.window?.screen else {
+            fatalError("Can not find screen info")
+        }
+
+        guard let displayID = screen.deviceDescription[NSDeviceDescriptionKey(rawValue: "NSScreenNumber")] as? CGDirectDisplayID else {
+            fatalError("Can not find screen device description")
+        }
+
+        return displayID
+    }
+
+    var currentSize: NSSize {
+        guard let screen = self.captureController?.window?.screen else {
+            fatalError("Can not find screen info")
+        }
+
+        guard let size = screen.deviceDescription[NSDeviceDescriptionKey.size] as? NSSize else {
+            fatalError("Can not find screen device description")
+        }
+        return size
+    }
     
     func prapareVideoScreen() {
-
-        let displayID = CGMainDisplayID()
-
-        // Movie Output
         self.videoMovieFileOutput = AVCaptureMovieFileOutput()
 
-        let captureInput = AVCaptureScreenInput(displayID: displayID)
+        let captureInput = AVCaptureScreenInput(displayID: currentDisplayID)
         self.captureSession = AVCaptureSession()
 
         if self.captureSession.canAddInput(captureInput) {
@@ -223,15 +244,20 @@ extension AppDelegate {
         }
         
         if let frame = self.captureController?.window?.frame {
+
+            let quartzScreenFrame = CGDisplayBounds(currentDisplayID)
+            let x = frame.origin.x - quartzScreenFrame.origin.x
+            let y = frame.origin.y - quartzScreenFrame.origin.y
+
             // cropping
             let differencialValue = CGFloat(SengiriCropViewLineWidth)
             let optimizeFrame = NSRect(
-                x: frame.origin.x + differencialValue,
-                y: frame.origin.y + differencialValue,
+                x: x + differencialValue,
+                y: y + differencialValue,
                 width: frame.width - differencialValue * 2.0,
                 height: frame.height - differencialValue * 2.0
             )
-            
+
             captureInput.cropRect = optimizeFrame
             
             // start recording
@@ -268,7 +294,6 @@ extension AppDelegate: AVCaptureFileOutputRecordingDelegate {
             size.width = size.width * compressionRate
             size.height = size.height * compressionRate
         }
-
 
         let regift = Regift(
             sourceFileURL: outputFileURL,
