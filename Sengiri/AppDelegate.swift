@@ -250,7 +250,7 @@ extension AppDelegate {
             let y = frame.origin.y - quartzScreenFrame.origin.y
 
             // cropping
-            let differencialValue = CGFloat(SengiriCropViewLineWidth)
+            let differencialValue = SengiriCropViewLineWidth
             let optimizeFrame = NSRect(
                 x: x + differencialValue,
                 y: y + differencialValue,
