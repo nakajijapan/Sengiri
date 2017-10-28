@@ -37,12 +37,6 @@ class CaptureWindow: NSWindow {
         )
 
         setFrame(NSRect(x: 200, y: 200, width: 500, height: 500), display: true)
-
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
-            self.keyDown(with: aEvent)
-            return aEvent
-        }
-        
     }
 
     deinit {
@@ -63,5 +57,4 @@ class CaptureWindow: NSWindow {
     override func performKeyEquivalent(with theEvent: NSEvent) -> Bool {
         return false
     }
-    
 }

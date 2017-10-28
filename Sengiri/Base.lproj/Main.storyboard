@@ -450,7 +450,7 @@ IA
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="recordButton" destination="zmm-Ul-ZEI" id="7no-GF-qx6"/>
+                        <outlet property="recordButton" destination="zmm-Ul-ZEI" id="nvW-kI-K9Z"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
