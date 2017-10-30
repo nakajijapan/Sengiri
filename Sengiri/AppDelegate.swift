@@ -248,7 +248,7 @@ extension AppDelegate {
 
             let mainDisplayBounds = CGDisplayBounds(CGMainDisplayID())
             let quartzScreenFrame = CGDisplayBounds(currentDisplayID)
-            let x = frame.origin.x - quartzScreenFrame.origin.x //+ frame.height
+            let x = frame.origin.x - quartzScreenFrame.origin.x
             let y = frame.origin.y - (mainDisplayBounds.height - quartzScreenFrame.origin.y - quartzScreenFrame.height)
 
             // cropping
