@@ -246,9 +246,10 @@ extension AppDelegate {
         
         if let frame = captureController?.window?.frame {
 
+            let mainDisplayBounds = CGDisplayBounds(CGMainDisplayID())
             let quartzScreenFrame = CGDisplayBounds(currentDisplayID)
             let x = frame.origin.x - quartzScreenFrame.origin.x
-            let y = frame.origin.y - quartzScreenFrame.origin.y
+            let y = frame.origin.y - (mainDisplayBounds.height - quartzScreenFrame.origin.y - quartzScreenFrame.height)
 
             // cropping
             let differencialValue = SengiriCropViewLineWidth
